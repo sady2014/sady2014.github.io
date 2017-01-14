@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="this是Javascript语言的一个关键字。它代表函数运行时，自动生成的一个内部对象，只能在函数内部使用。比如，
+　　function test(){
+　    this.x = 1;
+}
+随着函数使用场合的不同，this的值会发生变化。但是有一个总的原则，那就是this指的是，调用函数的那个对象。下面分四种情况，详细讨论this的用法。情况一：纯粹的函数调用这是函数的最通常用法，属于全局性调">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2017/01/14/posy/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="this是Javascript语言的一个关键字。它代表函数运行时，自动生成的一个内部对象，只能在函数内部使用。比如，
+　　function test(){
+　    this.x = 1;
+}
+随着函数使用场合的不同，this的值会发生变化。但是有一个总的原则，那就是this指的是，调用函数的那个对象。下面分四种情况，详细讨论this的用法。情况一：纯粹的函数调用这是函数的最通常用法，属于全局性调">
+<meta property="og:updated_time" content="2017-01-14T08:07:31.099Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="this是Javascript语言的一个关键字。它代表函数运行时，自动生成的一个内部对象，只能在函数内部使用。比如，
+　　function test(){
+　    this.x = 1;
+}
+随着函数使用场合的不同，this的值会发生变化。但是有一个总的原则，那就是this指的是，调用函数的那个对象。下面分四种情况，详细讨论this的用法。情况一：纯粹的函数调用这是函数的最通常用法，属于全局性调">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-posy" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/14/posy/" class="article-date">
+  <time datetime="2017-01-14T08:06:27.047Z" itemprop="datePublished">2017-01-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>this是Javascript语言的一个关键字。<br>它代表函数运行时，自动生成的一个内部对象，只能在函数内部使用。比如，</p>
+<pre><code>　　function test(){
+　    this.x = 1;
+}
+</code></pre><p>随着函数使用场合的不同，this的值会发生变化。但是有一个总的原则，那就是this指的是，调用函数的那个对象。<br>下面分四种情况，详细讨论this的用法。<br>情况一：纯粹的函数调用<br>这是函数的最通常用法，属于全局性调用，因此this就代表全局对象Global。<br>请看下面这段代码，它的运行结果是1。</p>
+<pre><code>　　function test(){
+this.x = 1;
+alert(this.x);
+}
+test(); // 1
+</code></pre><p>　　<br>为了证明this就是全局对象，我对代码做一些改变：<br>　　var x = 1;<br>　　function test(){<br>　　　　alert(this.x);<br>　　}<br>　　test(); // 1<br>运行结果还是1。再变一下：<br>　　var x = 1;<br>　　function test(){<br>　　　　this.x = 0;<br>　　}<br>　　test();<br>　　alert(x); //0<br>情况二：作为对象方法的调用<br>函数还可以作为某个对象的方法调用，这时this就指这个上级对象。<br>　　function test(){<br>　　　　alert(this.x);<br>　　}<br>　　var o = {};<br>　　o.x = 1;<br>　　o.m = test;<br>　　o.m(); // 1<br>情况三 作为构造函数调用<br>所谓构造函数，就是通过这个函数生成一个新对象（object）。这时，this就指这个新对象。<br>　　function test(){<br>　　　　this.x = 1;<br>　　}<br>　　var o = new test();<br>　　alert(o.x); // 1<br>运行结果为1。为了表明这时this不是全局对象，我对代码做一些改变：<br>　　var x = 2;<br>　　function test(){<br>　　　　this.x = 1;<br>　　}<br>　　var o = new test();<br>　　alert(x); //2<br>运行结果为2，表明全局变量x的值根本没变。<br>情况四 apply调用<br>apply()是函数对象的一个方法，它的作用是改变函数的调用对象，它的第一个参数就表示改变后的调用这个函数的对象。因此，this指的就是这第一个参数。<br>　　var x = 0;<br>　　function test(){<br>　　　　alert(this.x);<br>　　}<br>　　var o={};<br>　　o.x = 1;<br>　　o.m = test;<br>　　o.m.apply(); //0<br>apply()的参数为空时，默认调用全局对象。因此，这时的运行结果为0，证明this指的是全局对象。<br>如果把最后一行代码修改为<br>　　o.m.apply(o); //1<br>运行结果就变成了1，证明了这时this代表的是对象o。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/01/14/posy/" data-id="cixwyocuk0001hckgbq8y1lun" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/01/14/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/01/14/posy/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/14/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
