@@ -1,0 +1,84 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    
+    <head>
+        <title>OLAINDEX安装桥接页</title>
+    </head>
+    
+    <body>
+        <p id="tip" style="display:none;">如果长时间未跳转，请点击:<a href="" id="direct">继续安装</a>
+
+        </p>
+        <script>
+            function parseURL(url) {
+                let a = document.createElement('a');
+                a.href = url;
+                return {
+                    source: url,
+                    protocol: a.protocol.replace(':', ''),
+                    host: a.hostname,
+                    port: a.port,
+                    query: a.search,
+                    params: (function() {
+                        let params = {},
+                            seg = a.search.replace(/^\?/, '').split('&'),
+                            len = seg.length,
+                            p;
+                        for (let i = 0; i < len; i++) {
+                            if (seg[i]) {
+                                p = seg[i].split('=');
+                                params[p[0]] = p[1];
+                            }
+                        }
+                        return params;
+                    })(),
+                    hash: a.hash.replace('#', ''),
+                    path: a.pathname.replace(/^([^\/])/, '/$1')
+                };
+            }
+
+            function parseParams(uri, params) {
+                const paramsArray = []
+                Object.keys(params).forEach(key => params[key] && paramsArray.push(`${key}=${params[key]}`))
+                if (uri.search(/\?/) === -1) {
+                    uri += `?${paramsArray.join('&')}`
+                } else {
+                    uri += `&${paramsArray.join('&')}`
+                }
+                return uri
+            }
+
+            function get(variable) {
+                let query = window.location.search.substring(1);
+                let vars = query.split("&");
+                for (let i = 0; i < vars.length; i++) {
+                    let pair = vars[i].split("=");
+                    if (pair[0] == variable) {
+                        return pair[1]
+                    }
+                }
+                return (false)
+            }
+
+            function display(id) {
+                let traget = document.getElementById(id);
+                if (traget.style.display == "none") {
+                    traget.style.display = ""
+                } else {
+                    traget.style.display = "none"
+                }
+            }
+            let state = get('state');
+            let code = get('code');
+            if (state) {
+                let redirect_url = parseParams(decodeURIComponent(state), {
+                    code: code
+                });
+                document.getElementById('direct').href = redirect_url;
+                window.location = redirect_url
+            } else {
+                document.write(code)
+            }
+        </script>
+    </body>
+
+</html>
